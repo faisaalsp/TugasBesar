@@ -14,10 +14,10 @@ app.get('/',async (req,res) =>{
     res.render('login')
 });
 
-app.get('/homeadmin', async (req,res) => {
+app.get('/homeAdmin', async (req,res) => {
     res.render('homeAdmin')
 });
 
-app.get('/managemember', async (req,res) => {
-    res.render('manageMemberAdmin')
+app.get('/laporanAdmin', async (req,res) => {
+    res.render('manageLaporanAdmin')
 });

@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/output.css">
+    <title>Laporan Admin</title>
+</head>
+<body class="bg-gradient-to-br from-[#110F10] to-[#FF0091] bg-fixed bg-cover">
+    <div class="h-screen">
+<!-- user & logout -->
+        <div class="flex flex-row justify-between items-center w-auto px-4 py-4 mx-8 rounded-md text-white bg-[#f5f5f2] backgdrop-blur-md bg-opacity-50">
+            <h1 class="text-xl font-bold">
+                Admin
+            </h1>
+            <!-- buat logout make GET nantinya -->
+            <a>Home</a>
+            <a>Log out</a>
+        </div>
+<!-- main content -->
+        <div class="main-content flex flex-col justify-start px-10">
+            <div class="flex flex-row justify-between px-10 mt-10">
+                <h2 class="text-2xl font-bold tracking-tight text-white">Laporan</h2> 
+                
+                <form action="#" method="post" class="inline-flex">
+                    <select name="filter-kelurahan" id="filter-kelurahan" class="mx-2 text-white shadow-3xl bg-[#f5f5f2] backgdrop-blur-md bg-opacity-50 rounded-md px-2 py-2">
+                        <option value="" selected disabled class="text-black">Kelurahan</option>
+                    </select>
+                    <select name="filter-kecamatan" id="filter-kecamatan" class="mx-2 text-white shadow-3xl bg-[#f5f5f2] backgdrop-blur-md bg-opacity-50 rounded-md px-2 py-2">
+                        <option value="" selected disabled class="text-black">Kecamatan</option>
+                    </select>
+                    <select name="filter-kota" id="filter-kota" class="mx-2 text-white shadow-3xl bg-[#f5f5f2] backgdrop-blur-md bg-opacity-50 rounded-md px-2 py-2">
+                        <option value="" selected disabled class="text-black">Kota</option>
+                    </select>
+                    <button type="submit" value="cari" class="mx-1 flex items-center justify-center shadow-3xl bg-black text-white font-semibold text-md px-4 py-2 rounded-md hover:cursor-pointer hover:bg-black/90"> 
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+<!-- paginasi -->
+            <div class="w-screen text-center text-white pt-4 pb-2">
+                <a>1 2 3 4 5 6 7 8 9 10</a>
+            </div> 
+            <div class="px-10 pb-10">                
+                <div class="bg-[#f5f5f2] backgdrop-blur-md bg-opacity-50 mt-10 rounded-md h-screen">
+                    <table class="table-auto w-full bg-transparent rounded-md">
+                        <thead class="bg-transparent">
+                            <tr class="bg-black text-white">
+                                <th class="py-2">Nama</th>
+                                <th class="py-2">Kelurahan</th>
+                                <th class="py-2">Kecamatan</th>
+                                <th class="py-2">Kota</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-black text-center">
+                                <td class="py-2"> Faisal Surya </th>
+                                <td class="py-2"> Cijaura </th>
+                                <td class="py-2"> Margacinta </th>
+                                <td class="py-2"> Bandung </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+<!-- paginasi -->
+            <div class="w-screen text-center text-white pt-4 pb-2">
+                <a>1 2 3 4 5 6 7 8 9 10</a>
+            </div> 
+        </div>
+</body>
+</html>
