@@ -21,3 +21,7 @@ app.get('/homeAdmin', async (req,res) => {
 app.get('/laporanAdmin', async (req,res) => {
     res.render('manageLaporanAdmin')
 });
+
+app.get('/login',async (req,res) =>{
+    res.render('login2')
+});
