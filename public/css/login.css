@@ -10,7 +10,7 @@ body {
   align-items: center;
   min-height: 100vh;
   width: 100%;
-  background: #377D71;
+  background-image: linear-gradient(to bottom right, #2B3F50, #377D71);
 }
 
 .form-box {
@@ -21,20 +21,20 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 15px;
 }
 
 .form-box h2 {
   padding: 10px;
   font-size: 1.6em;
-  color: #ffffff;
+  color: #FFFFFF;
 }
 
 .inputbox {
   position: relative;
   margin: 30px 0;
   width: 310px;
-  border-bottom: 2px solid #ffffff;
+  border-bottom: 2px solid #FFFFFF;
 }
 
 .inputbox label {
@@ -42,7 +42,7 @@ body {
   top: 50%;
   left: 5px;
   transform: translateY(-50%);
-  color: #ffffff;
+  color: #FFFFFF;
   font-size: 1em;
   pointer-events: none;
   transition: 0.5s;
@@ -60,28 +60,7 @@ input:valid ~ label {
   outline: none;
   font-size: 1em;
   padding: 0 35px 0 5px;
-  color: #ffffff;
-}
-
-.forget {
-  margin: -15px 0 15px;
-  font-size: 0.9em;
-  color: #ffffff;
-  display: flex;
-  justify-content: center;
-}
-
-.forget label input {
-  margin-right: 3px;
-}
-
-.forget label a {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.forget label a:hover {
-  text-decoration: underline;
+  color: #FFFFFF;
 }
 
 button {
@@ -94,22 +73,5 @@ button {
   cursor: pointer;
   font-size: 1em;
   font-weight: 650;
-  color: #ffffff;
-}
-
-.register {
-  font-size: 0.9em;
-  color: #ffffff;
-  text-align: center;
-  margin: 25px 0 10px;
-}
-
-.register p a {
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: 650;
-}
-
-.register p a:hover {
-  text-decoration: underline;
+  color: #FFFFFF;
 }
