@@ -12,7 +12,7 @@ app.listen(PORT, () => {
 });
 app.set('view engine','ejs');
 app.use(express.static(path.resolve('public')));
-
+app.use(express.urlencoded({extended:true}))
 
 //-------Session-------
 app.use(
@@ -81,28 +81,24 @@ app.get('/',async (req,res) =>{
 
 
 //-------Router Member-------
-app.post('/homePelanggan', async(req, res) => {
-    const user = req.body.username;
-    const pass = req.body.password;
+app.post('/', async(req, res) => {
+    const {user,pass} = req.body
     const conn = await dbConnect();
-    const login = await getLogin(conn, user, pass)
-    conn.query(`SELECT * FROM pelanggan WHERE username = '${user}' AND pass = '${pass}'`, (err, result) => {
-        if(err) throw err;
-        if(result.length > 0){
-            req.session.loggedin = true;
-            req.session.username = user;
-                res.redirect('/homePelanggan')
-        }
-        else{
-            res.send("Maaf username atau password salah")
-        }
-        res.end();
-    })
+    const login = await getLoginMember(conn, user, pass)
+    if(login.length > 0){
+        req.session.loggedin = true;
+        req.session.username = user;
+            res.redirect('/homePelanggan')
+    }
+    else{
+        res.send('<script>alert("Invalid username or password.");</script>')
+        // res.redirect('/')
+    }
 });
 
 app.get('/homePelanggan', async(req, res) => {
     const conn = await dbConnect();
-    const nama = req.session.namaP;
+    const nama = req.session.username;
     conn.release();
     res.render('homePelanggan', {
         nama
@@ -110,5 +106,10 @@ app.get('/homePelanggan', async(req, res) => {
 });
 
 app.get('/history', async (req,res) => {
-    res.render('history')
+    const conn = await dbConnect();
+    const nama = req.session.username;
+    conn.release();
+    res.render('history', {
+        nama
+    });
 });
