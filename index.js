@@ -103,12 +103,12 @@ const getNamaAdmin = (conn, user) => {
 
 
 //-------Router Login-------
-app.get('/',async (req,res) =>{
+app.get('/login',async (req,res) =>{
     let arr = "";
     res.render('login', {arr})
 });
 
-app.post('/', async(req, res) => {
+app.post('/login', async(req, res) => {
     const conn = await dbConnect();
     const {user, pass} = req.body;
     const hashed_pass = crypto.createHash('sha256').update(pass).digest('base64');
@@ -125,7 +125,7 @@ app.post('/', async(req, res) => {
             req.session.nama = getNama[0].namaP;
             // console.log(getNama)
             req.session.username = user;
-            res.redirect('/homePelanggan')
+            res.redirect('/homeMember')
         }
         else if(admin.length > 0){
             // untuk admin jika login
@@ -135,16 +135,25 @@ app.post('/', async(req, res) => {
             req.session.username = user;
             res.redirect('/homeAdmin')
         }
+        else{
+            arr = "Username atau Password salah!";
+            res.render('login', {arr})
+        }
     }
 });
 
 
 //-------Router Member-------
-app.get('/homePelanggan', async(req, res) => {
+app.get('/',async (req,res) =>{
+    let arr = "";
+    res.render('homePelanggan')
+});
+
+app.get('/homeMember', async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     conn.release();
-    res.render('homePelanggan', {
+    res.render('homeMember', {
         nama
     });
 });
