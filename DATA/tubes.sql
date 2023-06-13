@@ -1,109 +1,182 @@
-CREATE TABLE adminbl (
-    idA INT NOT NULL,
-    namaA VARCHAR(15),
-    username VARCHAR(15),
-    pass VARCHAR(15)
-);
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jun 13, 2023 at 03:31 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
-CREATE TABLE pelanggan (
-    idP INT NOT NULL,
-    namaP VARCHAR(15),
-    username VARCHAR(15),
-    pass VARCHAR(15)
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-CREATE TABLE transaksi (
-    idTransaksi INT NOT NULL,
-    tglTransaksi DATE,
-    totalTiket INT NOT NULL,
-    idPelanggan INT NOT NULL,
-    harga FLOAT
-);
 
-CREATE TABLE tiket (
-    idT INT NOT NULL,
-    statusTiket VARCHAR(15),
-    harga FLOAT,
-    jam INT NOT NULL,
-    tanggal DATE,
-    idM INT NOT NULL
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE meja (
-    idM INT NOT NULL,
-    noMeja INT NOT NULL
-);
+--
+-- Database: `tubes`
+--
 
-CREATE TABLE alamat (
-    idAlamat INT NOT NULL,
-    alamat VARCHAR(50),
-    idPelanggan INT NOT NULL,
-    idKel INT NOT NULL,
-    idKec INT NOT NULL,
-    idKota INT NOT NULL
-);
+-- --------------------------------------------------------
 
-CREATE TABLE kelurahan (
-    idKel INT NOT NULL,
-    kelurahan VARCHAR(50),
-    idKec INT NOT NULL
-);
+--
+-- Table structure for table `adminbl`
+--
 
-CREATE TABLE kecamatan (
-    idKec INT NOT NULL,
-    kecamatan VARCHAR(50),
-    idKota INT NOT NULL
-);
+CREATE TABLE `adminbl` (
+  `idA` int(11) NOT NULL,
+  `namaA` varchar(15) DEFAULT NULL,
+  `username` varchar(15) DEFAULT NULL,
+  `pass` varchar(64) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE kota (
-    idKota INT NOT NULL,
-    kota VARCHAR(50)
-);
+-- --------------------------------------------------------
 
-INSERT INTO adminbl (idA, namaA, username, pass)
-VALUES (1, 'Faisal Surya', 'faisal', 'faisal123');
+--
+-- Table structure for table `alamat`
+--
 
-INSERT INTO pelanggan (idP, namaP, username, pass)
-VALUES (1, 'Sergio Petri', 'sergio', 'sergipetri');
+CREATE TABLE `alamat` (
+  `idAlamat` int(11) NOT NULL,
+  `alamat` varchar(50) DEFAULT NULL,
+  `idPelanggan` int(11) NOT NULL,
+  `idKel` int(11) NOT NULL,
+  `idKec` int(11) NOT NULL,
+  `idKota` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO pelanggan (idP, namaP, username, pass)
-VALUES (2, 'Irsyad Aegis', 'irsyad', 'kayu3.0');
+-- --------------------------------------------------------
 
-INSERT INTO alamat (idAlamat, alamat, idPelanggan, idKel, idKec, idKota)
-VALUES(1, 'Komplek Summarecon blok F no 7', 1, 1, 1, 1)
+--
+-- Table structure for table `kecamatan`
+--
 
-INSERT INTO alamat (idAlamat, alamat, idPelanggan, idKel, idKec, idKota)
-VALUES(2, 'Komplek Podomoro Park blok F no 7', 2, 2, 2, 1)
+CREATE TABLE `kecamatan` (
+  `idKec` int(11) NOT NULL,
+  `kecamatan` varchar(50) DEFAULT NULL,
+  `idKota` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO kelurahan (idKel, kelurahan, idKec)
-VALUES(1, 'Dago', 1)
+-- --------------------------------------------------------
 
-INSERT INTO kelurahan (idKel, kelurahan, idKec)
-VALUES(2, 'Hegarmanah', 2)
+--
+-- Table structure for table `kelurahan`
+--
 
-INSERT INTO kecamatan (idKec, kecamatan, idKota)
-VALUES(1, 'Coblong', 1)
+CREATE TABLE `kelurahan` (
+  `idKel` int(11) NOT NULL,
+  `kelurahan` varchar(50) DEFAULT NULL,
+  `idKec` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO kecamatan (idKec, kecamatan, idKota)
-VALUES(2, 'Cidadap', 1)
+-- --------------------------------------------------------
 
-INSERT INTO kota (idKota, kota)
-VALUES(1, 'Bandung')
+--
+-- Table structure for table `kota`
+--
 
-INSERT INTO meja(idM, noMeja)
-VALUES (1, 1)
+CREATE TABLE `kota` (
+  `idKota` int(11) NOT NULL,
+  `kota` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO meja(idM, noMeja)
-VALUES (2, 2)
+-- --------------------------------------------------------
 
-INSERT INTO meja(idM, noMeja)
-VALUES (3, 3)
+--
+-- Table structure for table `meja`
+--
 
-INSERT INTO meja(idM, noMeja)
-VALUES (4, 4)
+CREATE TABLE `meja` (
+  `idM` int(11) NOT NULL,
+  `noMeja` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO meja(idM, noMeja)
-VALUES (5, 5)
+-- --------------------------------------------------------
 
-INSERT INTO tiket (idT, statusTiket, harga, jam, tanggal, idM)
-VALUES (1, 'available', 50000, 13, '2023-06-10', 1)
+--
+-- Table structure for table `pelanggan`
+--
+
+CREATE TABLE `pelanggan` (
+  `idP` int(11) NOT NULL,
+  `namaP` varchar(15) DEFAULT NULL,
+  `username` varchar(15) DEFAULT NULL,
+  `pass` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pelanggan`
+--
+
+INSERT INTO `pelanggan` (`idP`, `namaP`, `username`, `pass`) VALUES
+(1, 'irsyad', 'irsyadCebok', 'irsyad123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tiket`
+--
+
+CREATE TABLE `tiket` (
+  `idT` int(11) NOT NULL,
+  `statusTiket` varchar(15) DEFAULT NULL,
+  `harga` float DEFAULT NULL,
+  `jam` int(11) NOT NULL,
+  `tanggal` date DEFAULT NULL,
+  `idM` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi`
+--
+
+CREATE TABLE `transaksi` (
+  `idTransaksi` int(11) NOT NULL,
+  `tglTransaksi` date DEFAULT NULL,
+  `totalTiket` int(11) NOT NULL,
+  `idPelanggan` int(11) NOT NULL,
+  `harga` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `adminbl`
+--
+ALTER TABLE `adminbl`
+  ADD PRIMARY KEY (`idA`);
+
+--
+-- Indexes for table `pelanggan`
+--
+ALTER TABLE `pelanggan`
+  ADD PRIMARY KEY (`idP`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `adminbl`
+--
+ALTER TABLE `adminbl`
+  MODIFY `idA` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pelanggan`
+--
+ALTER TABLE `pelanggan`
+  MODIFY `idP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
