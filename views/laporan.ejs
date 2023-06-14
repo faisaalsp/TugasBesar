@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav class="navigation">
-        <h1>Welcome, <%= nama %></h1>
+        <h1><%= nama %></h1>
         <a href="/homeAdmin">Home</a>
         <a href="/manageMember">Manage Members</a>
         <a href="/">Log out</a>
@@ -20,10 +20,13 @@
 <!-- dropdown jam dan meja -->
             <form action="/filter" method="get" class="">
                 <select name="filter-jam" id="filter-jam" class="">
-                    <option value="" selected disabled class="text-black">Jam</option>
+                    <option value="" selected disabled class="text-black">Kelurahan</option>
                 </select>
                 <select name="filter-meja" id="filter-meja" class="">
-                    <option value="" selected disabled class="">Meja</option>
+                    <option value="" selected disabled class="">Kecamatan</option>
+                </select>
+                <select name="filter-meja" id="filter-meja" class="">
+                    <option value="" selected disabled class="">Kota</option>
                 </select>
 
                 <button type="submit" value="cari" class=""> 

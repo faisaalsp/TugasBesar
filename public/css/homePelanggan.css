@@ -14,8 +14,6 @@ body{
   font-family: 'Lexend', sans-serif;
 }
 
-/* misc */
-
 /* scroll bar */
 ::-webkit-scrollbar {
   display: none;
@@ -146,6 +144,19 @@ body{
     border: none;
     box-shadow: 0 2px 9px rgba(0, 0, 0, 0.25);
   }
+
+  .container.catalogue .action-btn{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+
+  .container.catalogue .action-btn svg{
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #000;
+  }
+
   
   /* table */
   table{

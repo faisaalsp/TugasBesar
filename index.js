@@ -204,3 +204,30 @@ app.get('/addMember', async(req, res) => {
         nama
     });
 });
+
+app.get('/addMeja', async(req, res) => {
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    conn.release();
+    res.render('addMeja', {
+        nama
+    });
+});
+
+app.get('/editDataMember', async(req, res) => {
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    conn.release();
+    res.render('editDataMember', {
+        nama
+    });
+});
+
+app.get('/editMeja', async(req, res) => {
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    conn.release();
+    res.render('editMeja', {
+        nama
+    });
+});

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/addMeja.css">
+    <title>Edit Meja</title>
+</head>
+<body>
+    <nav class="navigation">
+        <h1><%= nama %></h1>
+        <a href="/homeAdmin">Home</a>
+        <a href="/manageMember">Manage Members</a>
+        <a href="/">Log out</a>
+    </nav>
+    <div class="form">
+        <div class="form-inner">
+            <form class="" method="" action="/">
+                <div class="form-img">
+                    <img alt="gambar meja" src="https://cdn.pixabay.com/photo/2012/04/14/15/50/pool-table-34356__480.png" alt="Meja" class="detail-img">
+                </div>
+                
+                <div class="form-input">
+                    <label for="name" class="">Nama :</label>
+                    <input type="text" value="" name="name" id="name" class="" required="">
+                </div>
+                <div class="form-input">
+                    <label for="harga" class="">Harga :</label>
+                    <input type="text" value="" inputmode="numeric" name="harga" id="email" class="" required="">
+                </div>
+                <div class="form-input">
+                    <label for="jam" class="">Jam :</label>
+                    <input type="text" value="" inputmode="numeric" name="jam" id="email" class="" required="">
+                </div>
+                <div class="set-product-status">
+                    <label for="redeemed">
+                        <input type="checkbox" name="redeemed" class="">Redeemed
+                    </label>
+                    <label for="available">
+                        <input type="checkbox" name="available" class="">Available
+                    </label>
+                    <label for="expired">
+                        <input type="checkbox" name="expired" class="">Expired
+                    </label>
+                    <label for="sold">
+                        <input type="checkbox" name="sold" class="">Sold
+                    </label>
+                </div>
+                <button type="submit" class="member">Save</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
