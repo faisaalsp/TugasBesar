@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/addMember.css">
+    <title>New Member</title>
+</head>
+<body>
+    <nav class="navigation">
+        <h1>Welcome, <%= nama %></h1>
+        <a href="/laporan">Laporan</a>
+        <a href="/ManageMember">Manage Members</a>
+        <a href="/">Log out</a>
+    </nav>
+    <h1 class="add-member-title">
+        Tambah Member Baru
+    </h1>
+    <div class="form">
+        <div class="form-inner">
+            <form class="" method="" action="/manageMember">
+                <div class="form-input">
+                    <label for="email" class="">Nama :</label>
+                    <input type="email" name="email" id="email" class="" placeholder="Nama" required="">
+                </div>
+                <div class="form-input">
+                    <label for="email" class="">Username :</label>
+                    <input type="email" name="email" id="email" class="" placeholder="Username" required="">
+                </div>
+                <div class="form-input">
+                    <label for="email" class="">Alamat :</label>
+                    <input type="email" name="email" id="email" class="" placeholder="Alamat" required="">
+                </div>
+                <div class="form-input">
+                    <label for="email" class="">Kelurahan :</label>
+                    <input type="email" name="email" id="email" class="" placeholder="Kelurahan" required="">
+                </div>
+                <div class="form-input">
+                    <label for="email" class="">Kecamatan :</label>
+                    <input type="email" name="email" id="email" class="" placeholder="Kecamatan" required="">
+                </div>
+                <div class="form-input">
+                    <label for="email" class="">Kota :</label>
+                    <input type="email" name="email" id="email" class="" placeholder="Kota" required="">
+                </div>
+                <button type="submit" class="member">Save</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

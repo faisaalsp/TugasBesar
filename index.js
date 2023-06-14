@@ -166,3 +166,41 @@ app.get('/history', async (req,res) => {
         nama
     });
 });
+
+
+//-------Router Admin-------
+app.get('/homeAdmin', async(req, res) => {
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    conn.release();
+    res.render('homeAdmin', {
+        nama
+    });
+});
+
+app.get('/laporan', async(req, res) => {
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    conn.release();
+    res.render('laporan', {
+        nama
+    });
+});
+
+app.get('/manageMember', async(req, res) => {
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    conn.release();
+    res.render('manageMember', {
+        nama
+    });
+});
+
+app.get('/addMember', async(req, res) => {
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    conn.release();
+    res.render('addMember', {
+        nama
+    });
+});
