@@ -310,3 +310,20 @@ body{
       width: 3rem;
       height: 3rem;
   }
+
+  .wrap {
+    position: center;
+    bottom: 30px;
+    left: 30px;
+    background: #fff;
+    max-width: 365px;
+    border-radius: 15px;
+    text-align: center;
+    padding: 25px 25px 30px 25px;
+  }
+
+  .wrap img {
+    max-width: 90px;
+  }
+
+  .wrap .con
