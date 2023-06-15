@@ -123,15 +123,13 @@
     <div id="cart" class=""></div>
 
     <!-- Cookie -->
-    <div class="wrap">
-      <img src="../assets/cookies.png" alt="" />
-      <div class="contentCookie">
+    <div class="wrapper">
+      <div class="content">
         <header>Cookies</header>
-        <p class="tulisancookie">
-          Kami menggunakan cookie untuk memastikan bahwa situs web kami
-          berfungsi dengan baik
+        <p class="cookieword">
+          Website ini menggunakan cookies untuk meningkatkan pengalaman anda.
         </p>
-        <div class="buttonCookie">
+        <div class="buttons">
           <button class="item">Saya mengerti</button>
           <a href="#" class="item">Pelajari selengkapnya</a>
         </div>
@@ -139,20 +137,23 @@
     </div>
 
     <script>
-      const cookieBox = document.querySelector(".wrap"),
-      acceptBtn = cookieBox.querySelector("buttonCookie button");
+      const cookieBox = document.querySelector(".wrapper"),
+        acceptBtn = cookieBox.querySelector("button");
 
-      acceptBtn.onClick = ()=>{
-        document.cookie = "max-age="+60*60*24*30;
-        if(document.cookie){
+      acceptBtn.onclick = () => {
+        document.cookie = "max-age=" + 60 * 60 * 24 * 30;
+        if (document.cookie) {
           cookieBox.classList.add("hide");
+        } else {
+          alert(
+            "Cookie can't be set! Please unblock this site from the cookie setting of your browser."
+          );
         }
-        else {
-          alert("Cookie can't be set!");
-        }
-      }
+      };
+      let checkCookie = document.cookie.indexOf("CookieBy=CodingNepal");
+      checkCookie != -1
+        ? cookieBox.classList.add("hide")
+        : cookieBox.classList.remove("hide");
     </script>
-    
-
   </body>
 </html>
