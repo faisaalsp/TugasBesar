@@ -124,7 +124,7 @@
 
     <!-- Cookie -->
     <div class="wrapper">
-      <img src="../assets/cookies.png" alt="">
+      <img src="../assets/cookies.png" alt="" />
       <div class="content">
         <header>Cookies</header>
         <p class="cookieword">
@@ -142,7 +142,7 @@
         acceptBtn = cookieBox.querySelector("button");
 
       acceptBtn.onclick = () => {
-        document.cookie = "max-age=" + 60 * 60 * 24 * 30;
+        document.cookie = "Cookie=TubesPbw; max-age=" + 60 * 60 * 24; // 1hari//
         if (document.cookie) {
           cookieBox.classList.add("hide");
         } else {
@@ -151,7 +151,7 @@
           );
         }
       };
-      let checkCookie = document.cookie.indexOf("CookieBy=CodingNepal");
+      let checkCookie = document.cookie.indexOf("Cookie=TubesPbw");
       checkCookie != -1
         ? cookieBox.classList.add("hide")
         : cookieBox.classList.remove("hide");
