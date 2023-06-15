@@ -322,8 +322,46 @@ body{
     padding: 25px 25px 30px 25px;
   }
 
+  .wrap.hide {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
   .wrap img {
     max-width: 90px;
   }
 
-  .wrap .con
+  .wrap .contentCookie {
+    margin-top: 10px;
+  }
+
+  .contentCookie header {
+    font-size: 25px;
+    font-weight: 600;
+  }
+
+  .contentCookie .tulisancookie {
+    margin: 5px 0 20px 0;
+  }
+
+  .contentCookie .buttonCookie {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .buttonCookie .item {
+    margin: 0 10px;
+  }
+  .buttonCookie button {
+    padding: 10px 20px;
+    background: #FF0099;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }

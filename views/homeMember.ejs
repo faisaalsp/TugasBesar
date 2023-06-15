@@ -121,21 +121,38 @@
 
     <!-- container buat nampung isi list cart  -->
     <div id="cart" class=""></div>
+
+    <!-- Cookie -->
+    <div class="wrap">
+      <img src="../assets/cookies.png" alt="" />
+      <div class="contentCookie">
+        <header>Cookies</header>
+        <p class="tulisancookie">
+          Kami menggunakan cookie untuk memastikan bahwa situs web kami
+          berfungsi dengan baik
+        </p>
+        <div class="buttonCookie">
+          <button class="item">Saya mengerti</button>
+          <a href="#" class="item">Pelajari selengkapnya</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const cookieBox = document.querySelector(".wrap"),
+      acceptBtn = cookieBox.querySelector("buttonCookie button");
+
+      acceptBtn.onClick = ()=>{
+        document.cookie = "max-age="+60*60*24*30;
+        if(document.cookie){
+          cookieBox.classList.add("hide");
+        }
+        else {
+          alert("Cookie can't be set!");
+        }
+      }
+    </script>
+    
+
   </body>
 </html>
-
-<!-- Cookie -->
-<div class="wrap">
-  <img src="../assets/cookies.png" alt="" />
-  <div class="contentCookie">
-    <header>Cookies</header>
-    <p>
-      Kami menggunakan cookie untuk memastikan bahwa situs web kami berfungsi
-      dengan baik
-    </p>
-    <div class="button">
-      <button class="item">Saya mengerti</button>
-      <a href="#" class="item">Pelajari selengkapnya</a>
-    </div>
-  </div>
-</div>
