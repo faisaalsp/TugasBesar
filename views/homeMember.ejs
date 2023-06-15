@@ -151,10 +151,8 @@
           );
         }
       };
-      let checkCookie = document.cookie.indexOf("Cookie=TubesPbw");
-      checkCookie != -1
-        ? cookieBox.classList.add("hide")
-        : cookieBox.classList.remove("hide");
+      let checkCookie = document.cookie.indexOf("Cookie=TubesPbw"); // cek set cookie
+      checkCookie != -1 ? cookieBox.classList.add("hide"): cookieBox.classList.remove("hide");
     </script>
   </body>
 </html>
