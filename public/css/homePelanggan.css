@@ -322,6 +322,10 @@ body{
     box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.15);
     text-align: center;
   }
+
+  .wrapper img {
+    max-width: 90px;
+  }
   .wrapper.hide{
     opacity: 0;
     pointer-events: none;
