@@ -9,10 +9,16 @@
   </head>
   <body>
     <nav class="navigation">
+      <div class="profile">
+        <img src="../assets/poto.jpg" id="photo">
+        <input type="file" id="file">
+        <label for="file" id="uploadBtn">Upload</label>
+      </div> 
       <h1>Welcome, <%= nama %></h1>
       <a href="/history">Cek History</a>
       <a href="">Check out</a>
       <a href="/">Log out</a>
+       
     </nav>
 
     <section class="container filter">
@@ -154,5 +160,8 @@
       let checkCookie = document.cookie.indexOf("Cookie=TubesPbw"); // cek set cookie
       checkCookie != -1 ? cookieBox.classList.add("hide"): cookieBox.classList.remove("hide");
     </script>
+
+    <!--Upload profile picture-->
+     
   </body>
 </html>
