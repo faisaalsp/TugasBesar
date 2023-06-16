@@ -74,19 +74,25 @@
       <table class="">
         <thead class="">
           <tr class="">
-            <th class="">No</th>
-            <th class="">ID</th>
             <th class="">Nama</th>
             <th class="">Username</th>
+            <th class="">Alamat</th>
+            <th class="">Kelurahan</th>
+            <th class="">Kecamatan</th>
+            <th class="">Kota</th>
             <th class="">Action</th>
           </tr>
         </thead>
-        <tbody class="">
+        <tbody>
+          <% let i = 1 %>
+          <% for(let data of dataPelanggan) { %>
           <tr>
-            <td class="">1</td>
-            <td class="">ABC123</td>
-            <td class="">Faisal Surya</td>
-            <td class="">faisal</td>
+            <td><%= data.namaP %></td>
+            <td><%= data.username %></td>
+            <td><%= data.alamat %></td>
+            <td><%= data.kelurahan %></td>
+            <td><%= data.kecamatan %></td>
+            <td><%= data.kota %></td>
             <td class="action-btn">
               <a href="/editDataMember">
                 <svg
@@ -106,6 +112,8 @@
               </a>
             </td>
           </tr>
+          <% i++ %>
+          <% } %>
         </tbody>
       </table>
     </section>
@@ -147,7 +155,5 @@
         </li>
       </ul>
     </div>
-    
-
   </body>
 </html>

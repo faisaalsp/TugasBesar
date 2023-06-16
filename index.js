@@ -101,6 +101,110 @@ const getNamaAdmin = (conn, user) => {
     })
 }
 
+const addMember = (conn, nama, username, pass, alamat, kel, kec, kota) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`INSERT INTO pelanggan (namaP, username, pass, alamat, idKel, idKec, idKota) VALUES ('${nama}', '${username}', '${pass}', '${alamat}', '${kel}', '${kec}', '${kota}')`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const namaKelKeIDKel = (conn, kel) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT idKel FROM kelurahan WHERE kelurahan = '${kel}'`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const namaKecKeIDKec = (conn, kec) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT idKec FROM kecamatan WHERE kecamatan = '${kec}'`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const namaKotaKeIDKota = (conn, kota) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT idKota FROM kota WHERE kota = '${kota}'`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const getDataPelanggan = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT * FROM pelanggan JOIN kelurahan ON pelanggan.idKel = kelurahan.idKel JOIN kecamatan ON kelurahan.idKec = kecamatan.idKec JOIN kota ON kecamatan.idKota = kota.idKota`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const getDataKelurahan = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT * FROM kelurahan`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const getDataKecamatan = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT * FROM kecamatan`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const getDataKota = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT * FROM kota`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
 
 //-------Router Login-------
 app.get('/login',async (req,res) =>{
@@ -190,18 +294,23 @@ app.get('/laporan', async(req, res) => {
 app.get('/manageMember', async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
+    const dataPelanggan = await getDataPelanggan(conn);
     conn.release();
+    // console.log(dataPelanggan);
     res.render('manageMember', {
-        nama
+        nama, dataPelanggan
     });
 });
 
 app.get('/addMember', async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
+    const dataKelurahan = await getDataKelurahan(conn);
+    const dataKecamatan = await getDataKecamatan(conn);
+    const dataKota = await getDataKota(conn);
     conn.release();
     res.render('addMember', {
-        nama
+        nama, dataKelurahan, dataKecamatan, dataKota
     });
 });
 
@@ -231,3 +340,30 @@ app.get('/editMeja', async(req, res) => {
         nama
     });
 });
+
+app.post('/addMember', async (req, res) => {
+    const conn = await dbConnect();
+    const {nama, user, pass, alamat, filterkel, filterkec, filterkota} = req.body
+    // console.log(nama)
+    // console.log(user)
+    // console.log(pass)
+    // console.log(alamat)
+    // console.log(filterkel)
+    // console.log(filterkec)
+    // console.log(filterkota)
+
+    const getIDKel = await namaKelKeIDKel(conn, filterkel);
+    const getIDKec = await namaKecKeIDKec(conn, filterkec);
+    const getIDKota = await namaKotaKeIDKota(conn, filterkota);
+    const idKel = getIDKel[0].idKel;
+    const idKec = getIDKec[0].idKec;
+    const idKota = getIDKota[0].idKota;
+    console.log(idKel)
+    console.log(idKec)
+    console.log(idKota)
+    const addNewMember = await addMember(conn, nama, user, pass, alamat, idKel, idKec, idKota);
+    conn.release();
+    res.redirect('/addMember');
+})
+
+app.post
