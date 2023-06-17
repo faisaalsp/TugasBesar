@@ -37,10 +37,10 @@
                 </div>
                 <div class="alamat">
                     <div class="dropdown">
-                        <label for="email" class="">Kelurahan :</label>
-                        <select name="filterkel" id="filter-kel" class="">
-                            <% for(let data of dataKelurahan) { %>
-                            <option value="<%= data.kelurahan %>"><%= data.kelurahan %></option>
+                        <label for="email" class="">Kota :</label>
+                        <select name="filterkota" id="filter-kota" class="">
+                            <% for(let data of dataKota) { %>
+                            <option value="<%= data.kota %>"><%= data.kota %></option>
                             <% } %>
                         </select>
                     </div>
@@ -53,10 +53,10 @@
                         </select>
                     </div>
                     <div class="dropdown">
-                        <label for="email" class="">Kota :</label>
-                        <select name="filterkota" id="filter-kota" class="">
-                            <% for(let data of dataKota) { %>
-                            <option value="<%= data.kota %>"><%= data.kota %></option>
+                        <label for="email" class="">Kelurahan :</label>
+                        <select name="filterkel" id="filter-kel" class="">
+                            <% for(let data of dataKelurahan) { %>
+                            <option value="<%= data.kelurahan %>"><%= data.kelurahan %></option>
                             <% } %>
                         </select>
                     </div>

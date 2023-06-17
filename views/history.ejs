@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/history.css">
+    <script src="pagination.js" defer></script>
     <title>History</title>
 </head>
 <body>
     <nav class="navigation">
         <h1><%= nama %></h1>
         <a href="/homeMember">Home</a>
-        <a href="">Check out</a>
         <a href="/">Log out</a>
     </nav>
     <section class="container filter history">
@@ -27,7 +27,6 @@
                 <div class="">
                     <button type="submit" class="">Search</button>
                 </div>
-            
             </form>
         </div>
     </section>
@@ -38,20 +37,59 @@
                     <th class="">ID Transaksi</th>
                     <th class="">Tanggal Transaksi</th>
                     <th class="">Nomor Meja</th>
-                    <th class="">Total Harga</th>
                     <th class="">Jumlah Tiket</th>
+                    <th class="">Total Harga</th>
                 </tr>
             </thead>
-            <tbody class="">
+            <tbody>
+                <% let i = 1 %>
+                <% for(let data of history) { %>
                 <tr>
-                    <td>ABC123</td>
-                    <td>5 Mei 2023</td>
-                    <td>1</td>
-                    <td>150.000</td>
-                    <td>3</td>
-                </tr>                        
+                    <td><%= data.idTransaksi %></td>
+                    <td><%= data.tglTransaksi.toLocaleDateString() %></td>
+                    <td><%= data.noMeja %></td>
+                    <td><%= data.totalTiket %></td>
+                    <td>Rp.<%= data.harga %></td>
+                </tr> 
+                <% i++ %>
+                <% } %>                       
             </tbody>
         </table>
     </section>
+    <div class="pagination">
+        <ul>
+          <li class="btn prev" onclick="createPagination(totalPages, 4)">
+              <span>
+                  <i class="fas fa-angle-left">Prev</i>
+              </span>
+          </li>
+          <li class="first numb" onclick="createPagination(totalPages, 1)">
+              <span>1</span>
+          </li>
+          <li class="dots">
+              <span>...</span>
+          </li>
+          <li class="numb" onclick="createPagination(totalPages, 4)">
+              <span>4</span>
+          </li>
+          <li class="numb active" onclick="createPagination(totalPages, 5)">
+              <span>5</span>
+          </li>
+          <li class="numb" onclick="createPagination(totalPages, 6)">
+              <span>6</span>
+          </li>
+          <li class="dots">
+              <span>...</span>
+          </li>
+          <li class="last numb" onclick="createPagination(totalPages, 10)">
+              <span>10</span>
+          </li>
+          <li class="btn next" onclick="createPagination(totalPages, 6)">
+              <span>
+                  <i class="fas fa-angle-right">Next</i>
+              </span>
+          </li>
+        </ul>
+      </div>
 </body>
 </html>

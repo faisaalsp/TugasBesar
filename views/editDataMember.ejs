@@ -34,36 +34,27 @@
                     </div>
                     <div class="alamat">
                         <div class="dropdown">
-                            <label for="email" class="">Kelurahan :</label>
-                            <select name="filter-kel" id="filter-kel" class="">
-                                <option value="">Kelurahan</option>
-                                <option value="" class="">10</option>
-                                <option value="" class="">11</option>
-                                <option value="" class="">12</option>
-                                <option value="" class="">13</option>
-                                <option value="" class="">14</option>
+                            <label for="email" class="">Kota :</label>
+                            <select name="filterkota" id="filter-kota" class="">
+                                <% for(let data of dataKota) { %>
+                                <option value="<%= data.kota %>"><%= data.kota %></option>
+                                <% } %>
                             </select>
                         </div>
                         <div class="dropdown">
                             <label for="email" class="">Kecamatan :</label>
-                            <select name="filter-kec" id="filter-kec" class="">
-                                <option value="">Kecamatan</option>
-                                <option value="" class="">10</option>
-                                <option value="" class="">11</option>
-                                <option value="" class="">12</option>
-                                <option value="" class="">13</option>
-                                <option value="" class="">14</option>
+                            <select name="filterkec" id="filter-kec" class="">
+                                <% for(let data of dataKecamatan) { %>
+                                <option value="<%= data.kecamatan %>"><%= data.kecamatan %></option>
+                                <% } %>
                             </select>
                         </div>
                         <div class="dropdown">
-                            <label for="email" class="">Kota :</label>
-                            <select name="filter-kota" id="filter-kota" class="">
-                                <option value="">Kota</option>
-                                <option value="" class="">10</option>
-                                <option value="" class="">11</option>
-                                <option value="" class="">12</option>
-                                <option value="" class="">13</option>
-                                <option value="" class="">14</option>
+                            <label for="email" class="">Kelurahan :</label>
+                            <select name="filterkel" id="filter-kel" class="">
+                                <% for(let data of dataKelurahan) { %>
+                                <option value="<%= data.kelurahan %>"><%= data.kelurahan %></option>
+                                <% } %>
                             </select>
                         </div>
                     </div>

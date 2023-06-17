@@ -205,6 +205,32 @@ const getDataKota = (conn) => {
     })
 }
 
+const getIDPelanggan = (conn, nama) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT idP FROM pelanggan WHERE namaP = '${nama}'`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const getHistory = (conn, id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT * FROM transaksi WHERE idPelanggan = '${id}'`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
 
 //-------Router Login-------
 app.get('/login',async (req,res) =>{
@@ -248,8 +274,7 @@ app.post('/login', async(req, res) => {
 
 
 //-------Router Member-------
-app.get('/',async (req,res) =>{
-    let arr = "";
+app.get('/',async (req,res) => {
     res.render('homePelanggan')
 });
 
@@ -265,8 +290,21 @@ app.get('/homeMember', async(req, res) => {
 app.get('/history', async (req,res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
+    const idP = await getIDPelanggan(conn, nama);
+    const history = await getHistory(conn, idP[0].idP)
     conn.release();
+    // console.log(idP);
+    // console.log(history);
     res.render('history', {
+        nama, history
+    });
+});
+
+app.get('/pembayaran',async (req,res) =>{
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    conn.release();
+    res.render('pembayaran', {
         nama
     });
 });
@@ -326,9 +364,12 @@ app.get('/addMeja', async(req, res) => {
 app.get('/editDataMember', async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
+    const dataKelurahan = await getDataKelurahan(conn);
+    const dataKecamatan = await getDataKecamatan(conn);
+    const dataKota = await getDataKota(conn);
     conn.release();
     res.render('editDataMember', {
-        nama
+        nama, dataKelurahan, dataKecamatan, dataKota
     });
 });
 
@@ -358,12 +399,10 @@ app.post('/addMember', async (req, res) => {
     const idKel = getIDKel[0].idKel;
     const idKec = getIDKec[0].idKec;
     const idKota = getIDKota[0].idKota;
-    console.log(idKel)
-    console.log(idKec)
-    console.log(idKota)
+    // console.log(idKel)
+    // console.log(idKec)
+    // console.log(idKota)
     const addNewMember = await addMember(conn, nama, user, pass, alamat, idKel, idKec, idKota);
     conn.release();
     res.redirect('/addMember');
 })
-
-app.post
