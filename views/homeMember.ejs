@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Member</title>
     <link rel="stylesheet" href="../css/homePelanggan.css" />
+    
   </head>
   <body>
     <nav class="navigation">
-      <div class="profile">
-        <img src="../assets/poto.jpg" id="photo">
+      <div class="profile-pic-div">
+        <img src="../assets/poto.jpg"" id="photo">
         <input type="file" id="file">
-        <label for="file" id="uploadBtn">Upload</label>
-      </div> 
+        <label for="file" id="uploadBtn">Choose Photo</label>
+      </div>
       <h1>Welcome, <%= nama %></h1>
       <a href="/history">Cek History</a>
       <a href="">Check out</a>
@@ -159,9 +160,55 @@
       };
       let checkCookie = document.cookie.indexOf("Cookie=TubesPbw"); // cek set cookie
       checkCookie != -1 ? cookieBox.classList.add("hide"): cookieBox.classList.remove("hide");
+
+
+      
+      //upload foto
+      
+
+      const imgDiv = document.querySelector('.profile-pic-div');
+      const img = document.querySelector('#photo');
+      const file = document.querySelector('#file');
+      const uploadBtn = document.querySelector('#uploadBtn');
+
+      
+
+      imgDiv.addEventListener('mouseenter', function(){
+          uploadBtn.style.display = "block";
+      });
+
+      
+
+      imgDiv.addEventListener('mouseleave', function(){
+          uploadBtn.style.display = "none";
+      });
+
+      
+
+      //ketika mau pilih foto
+
+      file.addEventListener('change', function(){
+          //this refers to file
+          const choosedFile = this.files[0];
+
+          if (choosedFile) {
+
+              const reader = new FileReader(); 
+
+              reader.addEventListener('load', function(){
+                  img.setAttribute('src', reader.result);
+              });
+
+              reader.readAsDataURL(choosedFile);
+
+
+          }
+      });
+      
     </script>
 
     <!--Upload profile picture-->
+    
      
   </body>
 </html>

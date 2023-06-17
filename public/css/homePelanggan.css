@@ -374,10 +374,15 @@ tbody {
 
 /* upload profile photo */
 
-.navigation .profile img {
+.navigation .profile-pic-div{
   width: 60px;
   height: 60px;
   border-radius: 50%;
+}
+
+#photo{
+  height: 100%;
+  width: 100%;
 }
 
 #file {
@@ -387,4 +392,14 @@ tbody {
 
 #uploadBtn {
   background: rgba(0, 0, 0, 0.7);
+  font-size: 15px;
+  font-family: sans-serif;
+  text-align: center;
+  position: absolute;
+  width: 7%;
+  bottom: 0;
+  right: 93%;
+  
+  
+  
 }
