@@ -7,6 +7,7 @@
     <script src="pagination.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <title>Laporan</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <nav class="navigation">
@@ -110,7 +111,34 @@
             button.addEventListener("click", ()=>{
             })
         </script>
-
       </div>
+      <!-- grafik -->
+
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
+
+      <script>
+        const labels = ["January", "February", "March", "April", "May", "June"];
+        const data = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Penjualan per Bulan",
+              backgroundColor: "#070707",
+              borderColor: "rgb(255, 99, 132)",
+              data: [0, 10, 5, 2, 20, 30, 45],
+            },
+          ],
+        };
+  
+        const config = {
+          type: "bar",
+          data: data,
+          options: {},
+        };
+  
+        var myChart = new Chart(document.getElementById("myChart"), config);
+      </script>
 </body>
 </html>

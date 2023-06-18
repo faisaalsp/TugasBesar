@@ -263,4 +263,8 @@ tbody{
     text-align: center;
   }
 
-  
+  canvas {
+    background: #ffff;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
