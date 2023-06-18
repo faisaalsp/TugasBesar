@@ -19,23 +19,31 @@
             <h2 class="">Meja Tersedia :</h2> 
 <!-- dropdown jam dan meja -->
             <form action="" method="" class="">
-                <select name="filter-jam" id="filter-jam" class="">
+                <select name="filterjam" class="">
                     <option value="">Jam</option>
-                    <option value="" class="">10</option>
-                    <option value="" class="">11</option>
-                    <option value="" class="">12</option>
-                    <option value="" class="">13</option>
-                    <option value="" class="">14</option>
-                </select>
-
-                <select name="filter-meja" id="filter-meja" class="">
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                  </select>
+                  <select name="filtermeja" id="filter-meja" class="">
                     <option value="">Meja</option>
-                    <option value="" class="">1</option>
-                    <option value="" class="">2</option>
-                    <option value="" class="">3</option>
-                    <option value="" class="">4</option>
-                    <option value="" class="">5</option>
-                </select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
                 <button type="submit" value="cari" class=""> 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -52,20 +60,26 @@
 
     <section class="container catalogue">                
         <div id="meja-container" class="catalogue inner">
+            <% let i = 1 %>
+            <% for(let data of tiket) { %>
             <div id="meja" class="catalogue card">
                 <div class="container-image">
                     <img alt="gambar meja" src="https://cdn.pixabay.com/photo/2012/04/14/15/50/pool-table-34356__480.png" alt="Meja" class="">
                 </div>
                 <div class="card content">
                     <div class="card text-content">
-                        <h1 class="">Meja 1</h1>
-                        <p class="">Rp.50.000</p>
+                        <h1 class="">Meja <%= data.idM %></h1>
+                        <p>Jam : <%= data.jam %>.00</p>
+                        <p class="">Rp.<%= data.harga %></p>
                     </div>
+                    <p class="status"><%= data.tanggal.toLocaleDateString() %></p>
                     <div class="card button">
                         <button>Pesan</button>
                     </div>
                 </div>
             </div>
+            <% i++ %>
+            <% } %>
         </div>
     </section>
          

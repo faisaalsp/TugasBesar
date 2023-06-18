@@ -231,6 +231,32 @@ const getHistory = (conn, id) => {
     })
 }
 
+const getTiketAdmin = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT * FROM tiket`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const getTiketPelanggan = (conn) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT * FROM tiket WHERE statusTiket = 'Available'`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
 
 //-------Router Login-------
 app.get('/login',async (req,res) =>{
@@ -275,15 +301,20 @@ app.post('/login', async(req, res) => {
 
 //-------Router Member-------
 app.get('/',async (req,res) => {
-    res.render('homePelanggan')
+    const conn = await dbConnect();
+    const tiket = await getTiketPelanggan(conn);
+    res.render('homePelanggan', {
+        tiket
+    });
 });
 
 app.get('/homeMember', async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
+    const tiket = await getTiketPelanggan(conn);
     conn.release();
     res.render('homeMember', {
-        nama
+        nama, tiket
     });
 });
 
@@ -314,9 +345,10 @@ app.get('/pembayaran',async (req,res) =>{
 app.get('/homeAdmin', async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
+    const tiket = await getTiketAdmin(conn);
     conn.release();
     res.render('homeAdmin', {
-        nama
+        nama, tiket
     });
 });
 

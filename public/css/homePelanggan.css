@@ -218,14 +218,13 @@ tbody {
   background-color: rgba(245, 245, 242, 0.5);
   border-radius: 0.375rem;
   width: fit-content;
+  height: auto;
 }
 
 .container-image {
   min-height: 15rem;
   max-width: 22rem;
   aspect-ratio: 1/1;
-  width: 100%;
-  overflow: hidden;
   border-radius: 0.375rem;
 }
 
@@ -233,8 +232,6 @@ tbody {
   height: 100%;
   width: 100%;
   object-fit: cover;
-  object-position: right;
-  margin: auto;
 }
 
 .card.content {
@@ -243,6 +240,7 @@ tbody {
   justify-content: space-between;
   width: auto;
   color: white;
+  height: fit-content;
 }
 
 .card.text-content {
@@ -399,4 +397,13 @@ tbody {
   width: 6%;
   bottom: 10px;
   right: 93%;
+}
+
+.status{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 0.5px;
+  color: #000000;
+  font-weight: bold;
 }
