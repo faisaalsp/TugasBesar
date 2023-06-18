@@ -13,55 +13,63 @@
         <a href="/manageMember">Manage Members</a>
         <a href="/">Log out</a>
     </nav>
-    <h1 class="add-member-title">
-        Edit data Faisal Surya
-    </h1>
-    <div class="form">
-        <div class="form-inner">
+    <% for(let data of dataEdit) { %>
+        <h1 class="add-member-title">
+            Edit data <%= data.namaP %>
+        </h1>
+        <div class="form">
             <div class="form-inner">
-                <form class="" method="" action="/editDataMember">
-                    <div class="form-input">
-                        <label for="email" class="">Nama :</label>
-                        <input type="email" name="email" id="email" class="" placeholder="Nama" required="">
-                    </div>
-                    <div class="form-input">
-                        <label for="email" class="">Username :</label>
-                        <input type="email" name="email" id="email" class="" placeholder="Username" required="">
-                    </div>
-                    <div class="form-input">
-                        <label for="email" class="">Alamat :</label>
-                        <input type="email" name="email" id="email" class="" placeholder="Alamat" required="">
-                    </div>
-                    <div class="alamat">
-                        <div class="dropdown">
-                            <label for="email" class="">Kota :</label>
-                            <select name="filterkota" id="filter-kota" class="">
-                                <% for(let data of dataKota) { %>
-                                <option value="<%= data.kota %>"><%= data.kota %></option>
-                                <% } %>
-                            </select>
+                <div class="form-inner">
+                    <form method="post" action="/updateDataMember">
+                        <div class="form-input">
+                            <label class="">Nama :</label>
+                            <input type="text" name="namaP" value="<%= data.namaP %>" id="email" class="" placeholder="Nama" required="">
                         </div>
-                        <div class="dropdown">
-                            <label for="email" class="">Kecamatan :</label>
-                            <select name="filterkec" id="filter-kec" class="">
-                                <% for(let data of dataKecamatan) { %>
-                                <option value="<%= data.kecamatan %>"><%= data.kecamatan %></option>
-                                <% } %>
-                            </select>
+                        <div class="form-input">
+                            <label class="">Username :</label>
+                            <input type="username" name="username" value="<%= data.username %>" id="email" class="" placeholder="Username" required="">
                         </div>
-                        <div class="dropdown">
-                            <label for="email" class="">Kelurahan :</label>
-                            <select name="filterkel" id="filter-kel" class="">
-                                <% for(let data of dataKelurahan) { %>
-                                <option value="<%= data.kelurahan %>"><%= data.kelurahan %></option>
-                                <% } %>
-                            </select>
+                        <div class="form-input">
+                            <label class="">Alamat :</label>
+                            <input type="text" name="alamat" value="<%= data.alamat %>" id="email" class="" placeholder="Alamat" required="">
                         </div>
-                    </div>
-                    <button type="submit" class="member">Save</button>
-                </form>
+                        <div class="alamat">
+                            <div class="dropdown">
+                                <label for="email" class="">Kota :</label>
+                                <select name="filterkota" id="filter-kota" class="">
+                                    <option selected>
+                                        <%= data.kota %>
+                                    </option>
+                                    <% let current = data.kota %>
+                                    <% for (let row of dataKota) { %>
+                                        <% if (row.kota != current) { %>
+                                            <option value="<%= row.kota %>"><%= row.kota %></option>
+                                        <% } %>
+                                    <% } %>
+                                </select>
+                            </div>
+                            <div class="dropdown">
+                                <label for="email" class="">Kecamatan :</label>
+                                <select name="filterkec" id="filter-kec" class="">
+                                    <% for(let data of dataKecamatan) { %>
+                                    <option value="<%= data.kecamatan %>"><%= data.kecamatan %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+                            <div class="dropdown">
+                                <label for="email" class="">Kelurahan :</label>
+                                <select name="filterkel" id="filter-kel" class="">
+                                    <% for(let data of dataKelurahan) { %>
+                                    <option value="<%= data.kelurahan %>"><%= data.kelurahan %></option>
+                                    <% } %>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="member">Save</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
+    <% } %>
 </body>
 </html>

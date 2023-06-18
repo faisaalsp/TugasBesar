@@ -287,22 +287,35 @@ const getTiketPelanggan = (conn) => {
     })
 }
 
-// const getTiketPelanggan = (conn) => {
-//     return new Promise((resolve, reject) => {
-//         conn.query(`SELECT * FROM tiket WHERE statusTiket = 'Available'`, (err, result) => {
-//             if(err){
-//                 reject(err);
-//             }
-//             else{
-//                 resolve(result);
-//             }
-//         })
-//     })
-// }
-
 const getIDKeNama = (conn, id) => {
     return new Promise((resolve, reject) => {
         conn.query(`SELECT namaP FROM pelanggan WHERE idP = '${id}'`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const getIDKeEditNama = (conn, id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT * FROM pelanggan JOIN kelurahan ON pelanggan.idKel = kelurahan.idKel JOIN kecamatan ON kelurahan.idKec = kecamatan.idKec JOIN kota ON kecamatan.idKota = kota.idKota WHERE idP = '${id}'`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const updateDataMember = (conn, namaP, username, alamat, kota, kec, kel, id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`UPDATE pelanggan SET namaP = '${namaP}', username = '${username}', alamat = '${alamat}', idKota = '${kota}', idKec = '${kec}', idKel = '${kel}' WHERE idP = '${id}'`, (err, result) => {
             if(err){
                 reject(err);
             }
@@ -479,19 +492,18 @@ app.get('/addMeja', isAdmin, async(req, res) => {
     });
 });
 
-app.get('/editDataMember/:id', isAdmin, async(req, res) => {
+app.get('/editDataMember', isAdmin, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
-    const idP = req.params;
+    const id = req.session.editData
+    const dataEdit = await getIDKeEditNama(conn, id);
     const dataKelurahan = await getDataKelurahan(conn);
     const dataKecamatan = await getDataKecamatan(conn);
     const dataKota = await getDataKota(conn);
-    const dataPelanggan = await getDataPelanggan(conn);
-    const idNama = await getIDKeNama(conn, idP);
-    // console.log(idNama)
+    console.log(dataEdit)
     conn.release();
     res.render('editDataMember', {
-        nama, dataKelurahan, dataKecamatan, dataKota, dataPelanggan, idNama
+        nama, dataKelurahan, dataKecamatan, dataKota, dataEdit
     });
 });
 
@@ -536,4 +548,28 @@ app.post('/addMember', isAdmin, async (req, res) => {
     const addNewMember = await addMember(conn, nama, user, pass, alamat, idKel, idKec, idKota);
     conn.release();
     res.redirect('/addMember');
-})
+});
+
+app.post('/editDataMember/:id', isAdmin, async(req, res) => {
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    const {id} = req.params;
+    req.session.editData = id
+    console.log(req.session.editData);
+    conn.release();
+    res.redirect('/editDataMember')
+});
+
+app.post('/updateDataMember', isAdmin, async(req, res) => {
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    const id = req.session.editData;
+    console.log(id);
+    const {namaP, username, alamat, filterkota, filterkec, filterkel} = req.body;
+    const idKota = await namaKotaKeIDKota(conn, filterkota);
+    const idKec = await namaKecKeIDKec(conn, filterkec);
+    const idKel = await namaKelKeIDKel(conn, filterkel);
+    const updateMember = await updateDataMember(conn, namaP, username, alamat, idKota[0].idKota, idKec[0].idKec, idKel[0].idKel, id)
+    conn.release();
+    res.redirect('/manageMember')
+});
