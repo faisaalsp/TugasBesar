@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/history.css">
+    <title>Pembayaran</title>
+</head>
+<body>
+    <nav class="navigation">
+        <h1>Welcome, <%= nama %></h1>
+        <a href="/homeMember">Home</a>
+        <a href="/">Log out</a>
+    </nav>
+    <section class="container filter history">
+        <div class="filter">
+            <form action="/history" class="">
+                <div class="">
+                    <input name="start" type="date" class="" placeholder="Select date start">
+                </div>
+                <span>to</span>
+                <div>  
+                    <input name="end" type="date" class="" placeholder="Select date end">
+                </div>
+                <div>
+                    <button type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Transaksi</th>
+                    <th>Tanggal Transaksi</th>
+                    <th>Nomor Meja</th>
+                    <th>Jumlah Tiket</th>
+                    <th>Total Harga</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let i = 1 %>
+                <% for(let data of history) { %>
+                <tr>
+                    <td><%= data.idTransaksi %></td>
+                    <td><%= data.tglTransaksi.toLocaleDateString() %></td>
+                    <td><%= data.noMeja %></td>
+                    <td><%= data.totalTiket %></td>
+                    <td>Rp.<%= data.harga %></td>
+                </tr> 
+                <% i++ %>
+                <% } %>                       
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

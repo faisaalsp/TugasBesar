@@ -368,6 +368,17 @@ app.get('/pembayaran',async (req,res) =>{
     });
 });
 
+app.get('/tiket',async (req,res) =>{
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    const idP = await getIDPelanggan(conn, nama);
+    const history = await getHistory(conn, idP[0].idP);
+    conn.release();
+    res.render('tiket', {
+        nama, history
+    });
+});
+
 
 //-------Router Admin-------
 app.get('/homeAdmin', async(req, res) => {
