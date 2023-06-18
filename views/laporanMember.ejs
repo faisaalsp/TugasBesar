@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../css/laporan.css">
     <script src="pagination.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <title>Laporan</title>
+    <title>Laporan Member</title>
 </head>
 <body>
     <nav class="navigation">
@@ -19,15 +19,25 @@
     <section class="container filter">
         <div class="filter">
             <h2 class="">Total Pendapatan :</h2> 
-            <!-- dropdown jam dan meja -->
-            <form method="get" class="">
-                <a href="/laporanMember" type="button" class=""> 
+<!-- dropdown jam dan meja -->
+            <form action="/filter" method="get" class="">
+                <select name="filter-jam" id="filter-jam" class="">
+                    <option value="" selected disabled class="text-black">Kelurahan</option>
+                </select>
+                <select name="filter-meja" id="filter-meja" class="">
+                    <option value="" selected disabled class="">Kecamatan</option>
+                </select>
+                <select name="filter-meja" id="filter-meja" class="">
+                    <option value="" selected disabled class="">Kota</option>
+                </select>
+
+                <button type="submit" value="cari" class=""> 
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
-                </a>
+                </button>
 
-                <a href="/homeAdmin" type="button" class="">
+                <a href="/laporan" type="button" class="">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                     </svg>                          
@@ -49,19 +59,14 @@
                 </tr>
             </thead>
             <tbody>
-                <% let i = 1 %>
-                <% for(let data of laporan) { %>
                 <tr>
-                    <td><%= i %></td>
-                    <td><%= data.idTransaksi %></td>
-                    <td><%= data.tglTransaksi.toLocaleDateString() %></td>
                     <td><%= data.namaP %></td>
-                    <td><%= data.totalTiket %></td>
-                    <td><%= data.noMeja %></td>
-                    <td><%= data.harga %></td>
-                </tr>
-                <% i++ %>
-                <% } %>                   
+                    <td><%= data.username %></td>
+                    <td><%= data.alamat %></td>
+                    <td><%= data.kelurahan %></td>
+                    <td><%= data.kecamatan %></td>
+                    <td><%= data.kota %></td>
+                </tr>                   
             </tbody>
         </table>
     </section>
@@ -102,5 +107,6 @@
           </li>
         </ul>
       </div>
+
 </body>
 </html>

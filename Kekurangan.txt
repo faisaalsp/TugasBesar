@@ -1,1 +1,1 @@
-Halaman tinggal cart, check out, dan edit laporan
+Halaman tinggal cart dan edit laporan

@@ -218,6 +218,19 @@ const getIDPelanggan = (conn, nama) => {
     })
 }
 
+const getLaporan = (conn, id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT * FROM transaksi JOIN pelanggan ON transaksi.idPelanggan = pelanggan.idP`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
 const getHistory = (conn, id) => {
     return new Promise((resolve, reject) => {
         conn.query(`SELECT * FROM transaksi WHERE idPelanggan = '${id}'`, (err, result) => {
@@ -247,6 +260,19 @@ const getTiketAdmin = (conn) => {
 const getTiketPelanggan = (conn) => {
     return new Promise((resolve, reject) => {
         conn.query(`SELECT * FROM tiket WHERE statusTiket = 'Available'`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const getIDKeNama = (conn, id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT namaP FROM pelanggan WHERE idP = '${id}'`, (err, result) => {
             if(err){
                 reject(err);
             }
@@ -299,7 +325,7 @@ app.post('/login', async(req, res) => {
 });
 
 
-//-------Router Member-------
+//-------Router Pelanggan & Member-------
 app.get('/',async (req,res) => {
     const conn = await dbConnect();
     const tiket = await getTiketPelanggan(conn);
@@ -322,7 +348,7 @@ app.get('/history', async (req,res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     const idP = await getIDPelanggan(conn, nama);
-    const history = await getHistory(conn, idP[0].idP)
+    const history = await getHistory(conn, idP[0].idP);
     conn.release();
     // console.log(idP);
     // console.log(history);
@@ -334,9 +360,11 @@ app.get('/history', async (req,res) => {
 app.get('/pembayaran',async (req,res) =>{
     const conn = await dbConnect();
     const nama = req.session.nama;
+    const idP = await getIDPelanggan(conn, nama);
+    const history = await getHistory(conn, idP[0].idP);
     conn.release();
     res.render('pembayaran', {
-        nama
+        nama, history
     });
 });
 
@@ -355,9 +383,22 @@ app.get('/homeAdmin', async(req, res) => {
 app.get('/laporan', async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
+    const laporan = await getLaporan(conn)
+    // console.log(laporan)
     conn.release();
     res.render('laporan', {
-        nama
+        nama, laporan
+    });
+});
+
+app.get('/laporanMember', async(req, res) => {
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    const laporan = await getLaporan(conn)
+    // console.log(laporan)
+    conn.release();
+    res.render('laporanMember', {
+        nama, laporan
     });
 });
 
@@ -393,15 +434,19 @@ app.get('/addMeja', async(req, res) => {
     });
 });
 
-app.get('/editDataMember', async(req, res) => {
+app.get('/editDataMember/:id', async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
+    const idP = req.params;
     const dataKelurahan = await getDataKelurahan(conn);
     const dataKecamatan = await getDataKecamatan(conn);
     const dataKota = await getDataKota(conn);
+    const dataPelanggan = await getDataPelanggan(conn);
+    const idNama = await getIDKeNama(conn, idP);
+    // console.log(idNama)
     conn.release();
     res.render('editDataMember', {
-        nama, dataKelurahan, dataKecamatan, dataKota
+        nama, dataKelurahan, dataKecamatan, dataKota, dataPelanggan, idNama
     });
 });
 

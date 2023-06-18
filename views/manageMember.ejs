@@ -71,16 +71,16 @@
       </div>
     </section>
     <section class="table member">
-      <table class="">
-        <thead class="">
-          <tr class="">
-            <th class="">Nama</th>
-            <th class="">Username</th>
-            <th class="">Alamat</th>
-            <th class="">Kelurahan</th>
-            <th class="">Kecamatan</th>
-            <th class="">Kota</th>
-            <th class="">Action</th>
+      <table>
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Username</th>
+            <th>Alamat</th>
+            <th>Kelurahan</th>
+            <th>Kecamatan</th>
+            <th>Kota</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -94,7 +94,7 @@
             <td><%= data.kecamatan %></td>
             <td><%= data.kota %></td>
             <td class="action-btn">
-              <a href="/editDataMember">
+              <a href="/editDataMember/<%= data.idP %>">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

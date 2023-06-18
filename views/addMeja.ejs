@@ -32,19 +32,20 @@
                     <label for="jam" class="">Jam :</label>
                     <input type="text" inputmode="numeric" name="jam" id="email" class="" required="">
                 </div>
+                <div class="form-input">
+                    <label for="tanggal" class="">Tanggal :</label>
+                    <input type="date" inputmode="numeric" name="jam" id="email" class="" required="">
+                </div>
                 <div class="set-product-status">
-                    <label for="redeemed">
-                        <input type="checkbox" name="redeemed" class="">Redeemed
-                    </label>
-                    <label for="available">
-                        <input type="checkbox" name="available" class="">Available
-                    </label>
-                    <label for="expired">
-                        <input type="checkbox" name="expired" class="">Expired
-                    </label>
-                    <label for="sold">
-                        <input type="checkbox" name="sold" class="">Sold
-                    </label>
+                    <div class="dropdown">
+                        <label for="email" class="">Status :</label>
+                        <select name="filterstatus" class="">
+                            <option value="Available">Available</option>
+                            <option value="Expired">Expired</option>
+                            <option value="Redeemed">Redeemed</option>
+                            <option value="Sold">Sold</option>
+                        </select>
+                    </div>
                 </div>
                 <button type="submit" class="member">Save</button>
             </form>
