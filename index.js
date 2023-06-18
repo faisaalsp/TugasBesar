@@ -75,6 +75,23 @@ const getLoginMember = (conn, user, pass) => {
     })
 }
 
+//-------Untuk validasi admin atau member gaboleh ke halamannya
+const isAdmin = (req, res, next) => {
+    if (req.session.role == 'admin') {
+      next();
+    } else {
+      res.redirect('/homeAdmin');
+    }
+};
+
+const isMember = (req, res, next) => {
+    if (req.session.role == 'member') {
+      next();
+    } else {
+      res.redirect('/homeMember');
+    }
+};
+
 const getNamaMember = (conn, user) => {
     return new Promise((resolve, reject) => {
         conn.query(`SELECT namaP FROM pelanggan WHERE username = '${user}'`, (err, result) => {
@@ -233,7 +250,7 @@ const getLaporan = (conn, id) => {
 
 const getHistory = (conn, id) => {
     return new Promise((resolve, reject) => {
-        conn.query(`SELECT * FROM transaksi WHERE idPelanggan = '${id}'`, (err, result) => {
+        conn.query(`SELECT * FROM transaksi WHERE idPelanggan = '${id}' AND status = 1`, (err, result) => {
             if(err){
                 reject(err);
             }
@@ -269,6 +286,19 @@ const getTiketPelanggan = (conn) => {
         })
     })
 }
+
+// const getTiketPelanggan = (conn) => {
+//     return new Promise((resolve, reject) => {
+//         conn.query(`SELECT * FROM tiket WHERE statusTiket = 'Available'`, (err, result) => {
+//             if(err){
+//                 reject(err);
+//             }
+//             else{
+//                 resolve(result);
+//             }
+//         })
+//     })
+// }
 
 const getIDKeNama = (conn, id) => {
     return new Promise((resolve, reject) => {
@@ -307,6 +337,8 @@ app.post('/login', async(req, res) => {
             req.session.nama = getNama[0].namaP;
             // console.log(getNama)
             req.session.username = user;
+            req.session.role = 'member';
+            console.log(req.session.role)
             res.redirect('/homeMember')
         }
         else if(admin.length > 0){
@@ -315,6 +347,8 @@ app.post('/login', async(req, res) => {
             req.session.nama = getNama[0].namaA;
             // console.log(getNama)
             req.session.username = user;
+            req.session.role = 'admin';
+            console.log(req.session.role)
             res.redirect('/homeAdmin')
         }
         else{
@@ -334,7 +368,7 @@ app.get('/',async (req,res) => {
     });
 });
 
-app.get('/homeMember', async(req, res) => {
+app.get('/homeMember', isMember, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     const tiket = await getTiketPelanggan(conn);
@@ -344,7 +378,7 @@ app.get('/homeMember', async(req, res) => {
     });
 });
 
-app.get('/history', async (req,res) => {
+app.get('/history', isMember, async (req,res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     const idP = await getIDPelanggan(conn, nama);
@@ -357,7 +391,7 @@ app.get('/history', async (req,res) => {
     });
 });
 
-app.get('/pembayaran',async (req,res) =>{
+app.get('/pembayaran', isMember, async (req,res) =>{
     const conn = await dbConnect();
     const nama = req.session.nama;
     const idP = await getIDPelanggan(conn, nama);
@@ -368,7 +402,7 @@ app.get('/pembayaran',async (req,res) =>{
     });
 });
 
-app.get('/tiket',async (req,res) =>{
+app.get('/tiket', isMember, async (req,res) =>{
     const conn = await dbConnect();
     const nama = req.session.nama;
     const idP = await getIDPelanggan(conn, nama);
@@ -381,7 +415,7 @@ app.get('/tiket',async (req,res) =>{
 
 
 //-------Router Admin-------
-app.get('/homeAdmin', async(req, res) => {
+app.get('/homeAdmin', isAdmin, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     const tiket = await getTiketAdmin(conn);
@@ -391,7 +425,7 @@ app.get('/homeAdmin', async(req, res) => {
     });
 });
 
-app.get('/laporan', async(req, res) => {
+app.get('/laporan', isAdmin, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     const laporan = await getLaporan(conn)
@@ -402,7 +436,7 @@ app.get('/laporan', async(req, res) => {
     });
 });
 
-app.get('/laporanMember', async(req, res) => {
+app.get('/laporanMember', isAdmin, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     const laporan = await getLaporan(conn)
@@ -413,7 +447,7 @@ app.get('/laporanMember', async(req, res) => {
     });
 });
 
-app.get('/manageMember', async(req, res) => {
+app.get('/manageMember', isAdmin, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     const dataPelanggan = await getDataPelanggan(conn);
@@ -424,7 +458,7 @@ app.get('/manageMember', async(req, res) => {
     });
 });
 
-app.get('/addMember', async(req, res) => {
+app.get('/addMember', isAdmin, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     const dataKelurahan = await getDataKelurahan(conn);
@@ -436,7 +470,7 @@ app.get('/addMember', async(req, res) => {
     });
 });
 
-app.get('/addMeja', async(req, res) => {
+app.get('/addMeja', isAdmin, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     conn.release();
@@ -445,7 +479,7 @@ app.get('/addMeja', async(req, res) => {
     });
 });
 
-app.get('/editDataMember/:id', async(req, res) => {
+app.get('/editDataMember/:id', isAdmin, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     const idP = req.params;
@@ -461,7 +495,7 @@ app.get('/editDataMember/:id', async(req, res) => {
     });
 });
 
-app.get('/editMeja', async(req, res) => {
+app.get('/editMeja', isAdmin, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
     conn.release();
@@ -470,7 +504,7 @@ app.get('/editMeja', async(req, res) => {
     });
 });
 
-app.post('/addMember', async (req, res) => {
+app.post('/addMember', isAdmin, async (req, res) => {
     const conn = await dbConnect();
     const {nama, user, pass, alamat, filterkel, filterkec, filterkota} = req.body
     // console.log(nama)

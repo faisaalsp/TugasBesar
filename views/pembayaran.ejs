@@ -35,18 +35,16 @@
                     <th>ID Transaksi</th>
                     <th>Tanggal Transaksi</th>
                     <th>Nomor Meja</th>
-                    <th>Jumlah Tiket</th>
-                    <th>Total Harga</th>
+                    <th>Harga</th>
                 </tr>
             </thead>
             <tbody>
                 <% let i = 1 %>
-                <% for(let data of history) { %>
+                <% for(let data of tiket) { %>
                 <tr>
                     <td><%= data.idTransaksi %></td>
                     <td><%= data.tglTransaksi.toLocaleDateString() %></td>
                     <td><%= data.noMeja %></td>
-                    <td><%= data.totalTiket %></td>
                     <td>Rp.<%= data.harga %></td>
                 </tr> 
                 <% i++ %>

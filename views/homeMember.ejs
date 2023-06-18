@@ -69,22 +69,24 @@
       <div id="meja-container" class="catalogue inner">
         <% let i = 1 %>
         <% for(let data of tiket) { %>
-        <div id="meja" class="catalogue card">
-          <div class="container-image">
-            <img alt="gambar meja" src="https://cdn.pixabay.com/photo/2012/04/14/15/50/pool-table-34356__480.png" alt="Meja" class="">
-          </div>
-          <div class="card content">
-            <div class="card text-content">
-              <h1 class="">Meja <%= data.idM %></h1>
-              <p>Jam : <%= data.jam %>.00</p>
-              <p class="">Rp.<%= data.harga %></p>
+        <form action="/homeMember" method="post">
+          <div id="meja" class="catalogue card">
+            <div class="container-image">
+              <img alt="gambar meja" src="https://cdn.pixabay.com/photo/2012/04/14/15/50/pool-table-34356__480.png" alt="Meja" class="">
             </div>
-            <p class="status"><%= data.tanggal.toLocaleDateString() %></p>
-            <div class="card button">
-              <button>Pesan</button>
+            <div class="card content">
+              <div class="card text-content">
+                <h1 class="">Meja <%= data.idM %></h1>
+                <p>Jam : <%= data.jam %>.00</p>
+                <p class="">Rp.<%= data.harga %></p>
+              </div>
+              <p class="status"><%= data.tanggal.toLocaleDateString() %></p>
+              <div class="card button">
+                <button>Pesan</button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
         <% i++ %>
         <% } %>
       </div>
