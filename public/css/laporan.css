@@ -244,3 +244,23 @@ tbody{
     color: #fff;
     background: #e63e9a;
   }
+
+  /* Download Laporan */
+
+  .download {
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .download a {
+    text-decoration: none;
+    font-size: 1.3rem;
+    background: #FF0091;
+    color: #fff;
+    width: 200px;
+    padding: 7px 7px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  
