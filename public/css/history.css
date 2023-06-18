@@ -240,3 +240,12 @@ tbody{
     color: #fff;
     background: #e63e9a;
   }
+
+  canvas {
+    background: #ffff;
+    border-radius: 10px;
+    margin-top: 20px;
+    height: 500px;
+    justify-content: center;
+    margin-top: 120px;
+  }

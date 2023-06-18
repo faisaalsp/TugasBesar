@@ -1,0 +1,47 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/history.css" />
+    <title>Grafik</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  </head>
+  <body>
+    <nav class="navigation">
+      <h1>Welcome, <%= nama %></h1>
+      <a href="/homeMember">Home</a>
+      <a href="/laporan">Laporan</a>
+      <a href="/">Log out</a>
+    </nav>
+
+    <section>
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
+
+      <script>
+        const labels = ["January", "February", "March", "April", "May", "June"];
+        const data = {
+          labels: labels,
+          datasets: [
+            {
+              label: "Penjualan per Bulan",
+              backgroundColor: "#070707",
+              borderColor: "rgb(255, 99, 132)",
+              data: [55, 10, 5, 2, 20, 30, 45],
+            },
+          ],
+        };
+
+        const config = {
+          type: "bar",
+          data: data,
+          options: {},
+        };
+
+        var myChart = new Chart(document.getElementById("myChart"), config);
+      </script>
+    </section>
+  </body>
+</html>

@@ -1,143 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/laporan.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/laporan.css" />
     <script src="pagination.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <title>Laporan</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navigation">
-        <h1><%= nama %></h1>
-        <a href="/homeAdmin">Home</a>
-        <a href="/manageMember">Manage Members</a>
-        <a href="/">Log out</a>
-         
+      <h1><%= nama %></h1>
+      <a href="/homeAdmin">Home</a>
+      <a href="/manageMember">Manage Members</a>
+      <a href="/">Log out</a>
     </nav>
     <section class="container filter">
-        <div class="filter">
-            <h2 class="">Total Pendapatan :</h2> 
-            <!-- dropdown jam dan meja -->
-            <form method="get" class="">
-                <a href="/laporanMember" type="button" class=""> 
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                    </svg>
-                </a>
+      <div class="filter">
+        <h2 class="">Total Pendapatan :</h2>
+        <!-- dropdown jam dan meja -->
+        <form method="get" class="">
+          <a href="/laporanMember" type="button" class="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class=""
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
+          </a>
 
-                <a href="/homeAdmin" type="button" class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-                    </svg>                          
-                </a>
-            </form>
-        </div>
+          <a href="/homeAdmin" type="button" class="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              class=""
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+              />
+            </svg>
+          </a>
+        </form>
+      </div>
     </section>
     <section class="table member">
-        <table>
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>IDTransaksi</th>
-                    <th>Tanggal</th>
-                    <th>Nama</th>
-                    <th>Total Tiket</th>
-                    <th>No Meja</th>
-                    <th>Harga</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% let i = 1 %>
-                <% for(let data of laporan) { %>
-                <tr>
-                    <td><%= i %></td>
-                    <td><%= data.idTransaksi %></td>
-                    <td><%= data.tglTransaksi.toLocaleDateString() %></td>
-                    <td><%= data.namaP %></td>
-                    <td><%= data.totalTiket %></td>
-                    <td><%= data.noMeja %></td>
-                    <td><%= data.harga %></td>
-                </tr>
-                <% i++ %>
-                <% } %>                   
-            </tbody>
-        </table>
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>IDTransaksi</th>
+            <th>Tanggal</th>
+            <th>Nama</th>
+            <th>Total Tiket</th>
+            <th>No Meja</th>
+            <th>Harga</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% let i = 1 %> <% for(let data of laporan) { %>
+          <tr>
+            <td><%= i %></td>
+            <td><%= data.idTransaksi %></td>
+            <td><%= data.tglTransaksi.toLocaleDateString() %></td>
+            <td><%= data.namaP %></td>
+            <td><%= data.totalTiket %></td>
+            <td><%= data.noMeja %></td>
+            <td><%= data.harga %></td>
+          </tr>
+          <% i++ %> <% } %>
+        </tbody>
+      </table>
     </section>
     <!--Pagination-->
 
     <div class="pagination">
-        <ul>
-          <li class="btn prev" onclick="createPagination(totalPages, 4)">
-              <span>
-                  <i class="fas fa-angle-left">Prev</i>
-              </span>
-          </li>
-          <li class="first numb" onclick="createPagination(totalPages, 1)">
-              <span>1</span>
-          </li>
-          <li class="dots">
-              <span>...</span>
-          </li>
-          <li class="numb" onclick="createPagination(totalPages, 4)">
-              <span>4</span>
-          </li>
-          <li class="numb active" onclick="createPagination(totalPages, 5)">
-              <span>5</span>
-          </li>
-          <li class="numb" onclick="createPagination(totalPages, 6)">
-              <span>6</span>
-          </li>
-          <li class="dots">
-              <span>...</span>
-          </li>
-          <li class="last numb" onclick="createPagination(totalPages, 10)">
-              <span>10</span>
-          </li>
-          <li class="btn next" onclick="createPagination(totalPages, 6)">
-              <span>
-                  <i class="fas fa-angle-right">Next</i>
-              </span>
-          </li>
-        </ul>
-      </div>
-      <div class="download">
-        <a href="../assets/Laporan.pdf" download="Laporan.pdf">Download </a>
-
-        <script>
-            let button = document.querySelector(".download a");
-            button.addEventListener("click", ()=>{
-            })
-        </script>
-      </div>
-
-
-      <!-- grafik -->
-      <div>
-        <canvas id="myChart"></canvas>
-      </div>
+      <ul>
+        <li class="btn prev" onclick="createPagination(totalPages, 4)">
+          <span>
+            <i class="fas fa-angle-left">Prev</i>
+          </span>
+        </li>
+        <li class="first numb" onclick="createPagination(totalPages, 1)">
+          <span>1</span>
+        </li>
+        <li class="dots">
+          <span>...</span>
+        </li>
+        <li class="numb" onclick="createPagination(totalPages, 4)">
+          <span>4</span>
+        </li>
+        <li class="numb active" onclick="createPagination(totalPages, 5)">
+          <span>5</span>
+        </li>
+        <li class="numb" onclick="createPagination(totalPages, 6)">
+          <span>6</span>
+        </li>
+        <li class="dots">
+          <span>...</span>
+        </li>
+        <li class="last numb" onclick="createPagination(totalPages, 10)">
+          <span>10</span>
+        </li>
+        <li class="btn next" onclick="createPagination(totalPages, 6)">
+          <span>
+            <i class="fas fa-angle-right">Next</i>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <div class="download">
+      <a href="../assets/Laporan.pdf" download="Laporan.pdf">Download </a>
 
       <script>
-        const labels = ["January", "February", "March", "April", "May", "June"];
-        const data = {
-          labels: labels,
-          datasets: [
-            {
-              label: "Penjualan per Bulan",
-              backgroundColor: "#070707",
-              borderColor: "rgb(255, 99, 132)",
-              data: [0, 10, 5, 2, 20, 30, 45],
-            },
-          ],
-        };
-        const config = {
-          type: "bar",
-          data: data,
-          options: {},
-        };
-        var myChart = new Chart(document.getElementById("myChart"), config);
+        let button = document.querySelector(".download a");
+        button.addEventListener("click", () => {});
       </script>
-</body>
+
+      <div class="grafikbtn">
+        <a href="/grafik">Grafik</a>
+      </div>
+    </div>
+  </body>
 </html>

@@ -504,6 +504,15 @@ app.get('/editMeja', isAdmin, async(req, res) => {
     });
 });
 
+app.get('/grafik', isAdmin, async(req, res) => {
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    conn.release();
+    res.render('grafik', {
+        nama
+    });
+});
+
 app.post('/addMember', isAdmin, async (req, res) => {
     const conn = await dbConnect();
     const {nama, user, pass, alamat, filterkel, filterkec, filterkota} = req.body
