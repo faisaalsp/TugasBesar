@@ -9,7 +9,7 @@
     <nav class="navigation">
         <h1>Welcome, <%= nama %></h1>
         <a href="/homeMember">Home</a>
-        <a href="/tiket">Ticket</a>
+        <a href="/history">History</a>
         <a href="/">Log out</a>
     </nav>
     <section class="container filter history">
@@ -34,26 +34,28 @@
                 <tr>
                     <th>ID Transaksi</th>
                     <th>Tanggal Transaksi</th>
-                    <th>Nomor Meja</th>
+                    <th>No Tiket</th>
                     <th>Harga</th>
                 </tr>
             </thead>
             <tbody>
                 <% let i = 1 %>
-                <% for(let data of history) { %>
+                <% for(let data of cart) { %>
                 <tr>
                     <td><%= data.idTransaksi %></td>
                     <td><%= data.tglTransaksi.toLocaleDateString() %></td>
-                    <td><%= data.noMeja %></td>
+                    <td><%= data.idT %></td>
                     <td>Rp.<%= data.harga %></td>
                 </tr> 
                 <% i++ %>
                 <% } %>                       
             </tbody>
         </table>
-        <a href="/tiket">
-            <button type="submit" class="btnBayar">Bayar</button>
-        </a>
+        <form action="/updateBayar" method="post">
+            <a>
+                <button type="submit" class="btnBayar">Bayar</button>
+            </a>
+        </form>
     </section>
 </body>
 </html>

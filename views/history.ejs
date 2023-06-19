@@ -36,8 +36,7 @@
                 <tr class="">
                     <th class="">ID Transaksi</th>
                     <th class="">Tanggal Transaksi</th>
-                    <th class="">Nomor Meja</th>
-                    <th class="">Jumlah Tiket</th>
+                    <th class="">Nomor Tiket</th>
                     <th class="">Total Harga</th>
                 </tr>
             </thead>
@@ -47,8 +46,7 @@
                 <tr>
                     <td><%= data.idTransaksi %></td>
                     <td><%= data.tglTransaksi.toLocaleDateString() %></td>
-                    <td><%= data.noMeja %></td>
-                    <td><%= data.totalTiket %></td>
+                    <td><%= data.idT %></td>
                     <td>Rp.<%= data.harga %></td>
                 </tr> 
                 <% i++ %>

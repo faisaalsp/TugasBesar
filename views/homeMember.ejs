@@ -17,7 +17,6 @@
       </div>
       <h1>Welcome, <%= nama %></h1>
       <a href="/history">History</a>
-      <a href="/tiket">Ticket</a>
       <a href="/">Log out</a>
     </nav>
 
@@ -69,7 +68,7 @@
       <div id="meja-container" class="catalogue inner">
         <% let i = 1 %>
         <% for(let data of tiket) { %>
-        <form action="/homeMember" method="post">
+        <form action="/updateTiket/<%= data.idT %>" method="post">
           <div id="meja" class="catalogue card">
             <div class="container-image">
               <img alt="gambar meja" src="https://cdn.pixabay.com/photo/2012/04/14/15/50/pool-table-34356__480.png" alt="Meja" class="">

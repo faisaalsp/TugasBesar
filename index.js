@@ -260,6 +260,18 @@ const getHistory = (conn, id) => {
         })
     })
 }
+const getCart = (conn, id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT * FROM transaksi WHERE idPelanggan = '${id}' AND status = 0`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
 
 const getTiketAdmin = (conn) => {
     return new Promise((resolve, reject) => {
@@ -326,6 +338,45 @@ const updateDataMember = (conn, namaP, username, alamat, kota, kec, kel, id) => 
     })
 }
 
+const forTransaksi = (conn, tanggal, idP, harga, idT) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`INSERT INTO transaksi (tglTransaksi, idPelanggan, harga, idT) VALUES ('${tanggal}', '${idP}', '${harga}', '${idT}')`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const getHarga = (conn, idT) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`SELECT harga FROM tiket WHERE idT = '${idT}'`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
+const getLunas = (conn, id) => {
+    return new Promise((resolve, reject) => {
+        conn.query(`UPDATE transaksi SET status = '${1}' WHERE idPelanggan = '${id}'`, (err, result) => {
+            if(err){
+                reject(err);
+            }
+            else{
+                resolve(result);
+            }
+        })
+    })
+}
+
 
 //-------Router Login-------
 app.get('/login',async (req,res) =>{
@@ -351,6 +402,7 @@ app.post('/login', async(req, res) => {
             // console.log(getNama)
             req.session.username = user;
             req.session.role = 'member';
+            req.session.idMember = member[0].idP;
             console.log(req.session.role)
             res.redirect('/homeMember')
         }
@@ -376,6 +428,7 @@ app.post('/login', async(req, res) => {
 app.get('/',async (req,res) => {
     const conn = await dbConnect();
     const tiket = await getTiketPelanggan(conn);
+    conn.release();
     res.render('homePelanggan', {
         tiket
     });
@@ -408,22 +461,54 @@ app.get('/pembayaran', isMember, async (req,res) =>{
     const conn = await dbConnect();
     const nama = req.session.nama;
     const idP = await getIDPelanggan(conn, nama);
-    const history = await getHistory(conn, idP[0].idP);
+    const cart = await getCart(conn, idP[0].idP);
     conn.release();
     res.render('pembayaran', {
-        nama, history
+        nama, cart
     });
 });
 
-app.get('/tiket', isMember, async (req,res) =>{
+app.post('/updateTiket/:idT', isMember, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
-    const idP = await getIDPelanggan(conn, nama);
-    const history = await getHistory(conn, idP[0].idP);
+    const {idT} = req.params;
+    const harga = await getHarga(conn, idT);
+    //buat tanggal transaksi hari ini
+    const date = Date.now();
+    const today = new Date(date);
+    const formatMap = {
+        mm: today.getMonth() + 1,
+        dd: today.getDate(),
+        yyyy: today.getFullYear()
+    };
+    //buat kalau bulan harinya cuma 1 angka buat nyesuaiin di tipe db
+    if(formatMap.mm < 10){
+        var bulan = "0" + formatMap.mm
+    }
+    else{
+        var bulan = formatMap.mm
+    }
+    if(formatMap.dd < 10){
+        var hari = "0" + formatMap.dd
+    }
+    else{
+        var hari = formatMap.dd
+    }
+    const now = formatMap.yyyy + "-" + bulan + "-" + hari;
+    // console.log(now)
+    const addCart = await forTransaksi(conn, now, req.session.idMember, harga[0].harga, idT)
+    // console.log(harga)
     conn.release();
-    res.render('tiket', {
-        nama, history
-    });
+    res.redirect('/homeMember')
+});
+
+app.post('/updateBayar', isMember, async (req,res) =>{
+    const conn = await dbConnect();
+    const nama = req.session.nama;
+    const id = req.session.idMember;
+    const cart = await getLunas(conn, id)
+    conn.release();
+    res.redirect('/history');
 });
 
 
@@ -441,11 +526,17 @@ app.get('/homeAdmin', isAdmin, async(req, res) => {
 app.get('/laporan', isAdmin, async(req, res) => {
     const conn = await dbConnect();
     const nama = req.session.nama;
-    const laporan = await getLaporan(conn)
-    // console.log(laporan)
+    const laporan = await getLaporan(conn);
+    //buat total pendapatan
+    let total = 0;
+    for(let i = 0; i < laporan.length; i++){
+        total += laporan[i].harga
+    }
+    // console.log(total)
+    // console.log(laporan.length)
     conn.release();
     res.render('laporan', {
-        nama, laporan
+        nama, laporan, total
     });
 });
 
@@ -528,14 +619,6 @@ app.get('/grafik', isAdmin, async(req, res) => {
 app.post('/addMember', isAdmin, async (req, res) => {
     const conn = await dbConnect();
     const {nama, user, pass, alamat, filterkel, filterkec, filterkota} = req.body
-    // console.log(nama)
-    // console.log(user)
-    // console.log(pass)
-    // console.log(alamat)
-    // console.log(filterkel)
-    // console.log(filterkec)
-    // console.log(filterkota)
-
     const getIDKel = await namaKelKeIDKel(conn, filterkel);
     const getIDKec = await namaKecKeIDKec(conn, filterkec);
     const getIDKota = await namaKotaKeIDKota(conn, filterkota);

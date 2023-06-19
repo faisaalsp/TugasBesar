@@ -18,7 +18,7 @@
     </nav>
     <section class="container filter">
       <div class="filter">
-        <h2 class="">Total Pendapatan :</h2>
+        <h2 class="">Total Pendapatan : Rp. <%= total %> </h2>
         <!-- dropdown jam dan meja -->
         <form method="get" class="">
           <a href="/laporanMember" type="button" class="">
@@ -65,28 +65,28 @@
             <th>IDTransaksi</th>
             <th>Tanggal</th>
             <th>Nama</th>
-            <th>Total Tiket</th>
             <th>No Meja</th>
             <th>Harga</th>
           </tr>
         </thead>
         <tbody>
-          <% let i = 1 %> <% for(let data of laporan) { %>
-          <tr>
-            <td><%= i %></td>
-            <td><%= data.idTransaksi %></td>
-            <td><%= data.tglTransaksi.toLocaleDateString() %></td>
-            <td><%= data.namaP %></td>
-            <td><%= data.totalTiket %></td>
-            <td><%= data.noMeja %></td>
-            <td><%= data.harga %></td>
-          </tr>
-          <% i++ %> <% } %>
+          <% let i = 1 %>
+          <% for(let data of laporan) { %>
+            <tr>
+              <td><%= i %></td>
+              <td><%= data.idTransaksi %></td>
+              <td><%= data.tglTransaksi.toLocaleDateString() %></td>
+              <td><%= data.namaP %></td>
+              <td><%= data.idT %></td>
+              <td><%= data.harga %></td>
+            </tr>
+            <% i++ %>
+          <% } %>
         </tbody>
       </table>
     </section>
-    <!--Pagination-->
 
+    <!--Pagination-->
     <div class="pagination">
       <ul>
         <li class="btn prev" onclick="createPagination(totalPages, 4)">
@@ -123,7 +123,7 @@
       </ul>
     </div>
     <div class="download">
-      <a href="../assets/Laporan.pdf" download="Laporan.pdf">Download </a>
+      <a href="../assets/Laporan.pdf" download="Laporan.pdf">Download</a>
 
       <script>
         let button = document.querySelector(".download a");
