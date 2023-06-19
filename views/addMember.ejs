@@ -21,40 +21,40 @@
             <form class="" method="post" action="/addMember">
                 <div class="form-input">
                     <label for="email" class="">Nama :</label>
-                    <input type="text" name="nama" id="email" class="" placeholder="Nama" required="">
+                    <input type="text" name="nama" placeholder="Nama" required="">
                 </div>
                 <div class="form-input">
                     <label for="email" class="">Username :</label>
-                    <input type="username" name="user" id="email" class="" placeholder="Username" required="">
+                    <input type="username" name="user" placeholder="Username" required="">
                 </div>
                 <div class="form-input">
                     <label for="email" class="">Password :</label>
-                    <input type="password" name="pass" id="email" class="" placeholder="Username" required="">
+                    <input type="password" name="pass" placeholder="Username" required="">
                 </div>
                 <div class="form-input">
                     <label for="email" class="">Alamat :</label>
-                    <input type="text" name="alamat" id="email" class="" placeholder="Alamat" required="">
+                    <input type="text" name="alamat" placeholder="Alamat" required="">
                 </div>
                 <div class="alamat">
                     <div class="dropdown">
-                        <label for="email" class="">Kota :</label>
-                        <select name="filterkota" id="filter-kota" class="">
+                        <label>Kota :</label>
+                        <select name="filterkota" id="filter-kota">
                             <% for(let data of dataKota) { %>
                             <option value="<%= data.kota %>"><%= data.kota %></option>
                             <% } %>
                         </select>
                     </div>
                     <div class="dropdown">
-                        <label for="email" class="">Kecamatan :</label>
-                        <select name="filterkec" id="filter-kec" class="">
+                        <label>Kecamatan :</label>
+                        <select name="filterkec" id="filter-kec">
                             <% for(let data of dataKecamatan) { %>
                             <option value="<%= data.kecamatan %>"><%= data.kecamatan %></option>
                             <% } %>
                         </select>
                     </div>
                     <div class="dropdown">
-                        <label for="email" class="">Kelurahan :</label>
-                        <select name="filterkel" id="filter-kel" class="">
+                        <label>Kelurahan :</label>
+                        <select name="filterkel" id="filter-kel">
                             <% for(let data of dataKelurahan) { %>
                             <option value="<%= data.kelurahan %>"><%= data.kelurahan %></option>
                             <% } %>
